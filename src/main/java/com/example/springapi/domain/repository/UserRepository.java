@@ -1,11 +1,21 @@
 package com.example.springapi.domain.repository;
 
 import com.example.springapi.domain.object.User;
+import com.example.springapi.infrastructure.entity.UserEntity;
+
+import java.util.List;
 
 /**
  * インフラ層とのインタフェース
  */
 public interface UserRepository {
+
+    /**
+     * ユーザ検索
+     *
+     * @return ユーザ
+     */
+    List<UserEntity> fetchAll();
 
     /**
      * ユーザ検索

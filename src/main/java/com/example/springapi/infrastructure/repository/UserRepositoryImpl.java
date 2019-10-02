@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * 永続化の実装クラス
  * ドメインオブジェクトをEntityに変換してJPAをラップする
@@ -19,6 +21,15 @@ public class UserRepositoryImpl implements UserRepository {
 
     @NonNull
     private final UserJpaRepository userJpaRepository;
+
+    /**
+     * {@inheritDoc}
+     * @return
+     */
+    @Override
+    public List<UserEntity> fetchAll() {
+        return this.userJpaRepository.findAll();
+    }
 
     /**
      * {@inheritDoc}

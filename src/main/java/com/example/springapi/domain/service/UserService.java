@@ -2,9 +2,12 @@ package com.example.springapi.domain.service;
 
 import com.example.springapi.domain.object.User;
 import com.example.springapi.domain.repository.UserRepository;
+import com.example.springapi.infrastructure.entity.UserEntity;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * ユーザ操作のロジック
@@ -15,6 +18,15 @@ public class UserService {
 
     @NonNull
     private final UserRepository userRepository;
+
+    /**
+     * 全ユーザ検索
+     *
+     * @return ユーザ一覧
+     */
+    public List<UserEntity> fetchAll() {
+        return this.userRepository.fetchAll();
+    }
 
     /**
      * ユーザ検索

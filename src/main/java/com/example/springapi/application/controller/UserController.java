@@ -4,6 +4,7 @@ import com.example.springapi.application.resource.ErrorResponse;
 import com.example.springapi.application.resource.UserBody;
 import com.example.springapi.domain.object.User;
 import com.example.springapi.domain.service.UserService;
+import com.example.springapi.infrastructure.entity.UserEntity;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.NonNull;
@@ -11,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * ユーザ操作のコントローラ
@@ -22,6 +25,21 @@ public class UserController {
 
     @NonNull
     private final UserService userService;
+
+    /**
+     * ユーザ全検索
+     *
+     * @return ユーザ一覧
+     */
+    @ApiResponses({
+            @ApiResponse(code = 404, message = "Not Found", response = ErrorResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorResponse.class),
+    })
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserEntity> fetchAll() {
+        return this.userService.fetchAll();
+    }
 
     /**
      * ユーザ検索
